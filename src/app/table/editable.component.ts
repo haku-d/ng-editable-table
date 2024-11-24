@@ -137,13 +137,9 @@ export class EditableTableComponent implements OnInit {
   }
 
   onEditComplete(event: TableEditCompleteEvent) {
-    if (this.formGroup.dirty && event.index) {
-      this.products = [
-        ...this.products.slice(0, event.index),
-        this.formGroup.value,
-        ...this.products.slice(event.index + 1),
-      ];
-      this.formGroup.markAsPristine();
+    if (!event.field || event.index === null || event.index === undefined) return;
+    if (this.formGroup.get(event.field)?.dirty) {
+      this.products[event.index][event.field] = this.formGroup.get(event.field)?.value;
     }
   }
 
