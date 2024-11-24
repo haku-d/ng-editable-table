@@ -12,10 +12,14 @@ module.exports = [
     // Override or add rules here
     rules: {},
   },
-  ...nx.configs['flat/angular'],
-  ...nx.configs['flat/angular-template'],
+  // ...nx.configs['flat/angular'],
+  // ...nx.configs['flat/angular-template'],
   {
     files: ['**/*.ts'],
+    extends: [
+      'plugin:@nx/angular',
+      'plugin:@angular-eslint/template/process-inline-templates',
+    ],
     rules: {
       '@angular-eslint/directive-selector': [
         'error',
@@ -36,8 +40,8 @@ module.exports = [
     },
   },
   {
-    files: ['**/*.html'],
-    // Override or add rules here
+    files: ['*.html'],
+    extends: ['plugin:@nx/angular-template'],
     rules: {},
   },
 ];

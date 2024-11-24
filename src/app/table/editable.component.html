@@ -74,6 +74,16 @@
                 @case (cellType.Checkbox) {
                   <p-checkbox [binary]="true"  [ngModel]="rowData[col.field]"/>
                 }
+                @case (cellType.Icon) {
+                  <i
+                    class="{{ col.iconClass }}"
+                    [ngStyle]="{ cursor: 'pointer' }"
+                    (click)="
+                      col.iconOnClick &&
+                        col.iconOnClick(rowData[col.field], i, $event)
+                    "
+                  ></i>
+                }
                 @default  {
                   {{ rowData[col.field] }}
                 }

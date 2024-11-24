@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableEditCompleteEvent, TableEditInitEvent, TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
 import { pick } from 'lodash';
+import { AnyFunc } from 'simplytyped';
 
 enum TableCellType {
   Input = 'input',
@@ -22,6 +23,7 @@ enum TableCellType {
   Date = 'date',
   Link = 'link',
 }
+
 type TableColumn = {
   header: string;
   field: string;
@@ -29,6 +31,8 @@ type TableColumn = {
   width?: string;
   editable?: boolean;
   align?: 'left' | 'right' | 'center';
+  iconClass?: string;
+  iconOnClick?: AnyFunc
 };
 
 @Component({
@@ -72,6 +76,7 @@ export class EditableTableComponent implements OnInit {
       editable: true,
       cellType: TableCellType.InputNumber,
       width: '150px',
+      align: 'right',
     },
     {
       header: 'Category',
@@ -85,12 +90,21 @@ export class EditableTableComponent implements OnInit {
       editable: true,
       cellType: TableCellType.InputNumber,
       width: '150px',
+      align: 'right',
     },
     {
       header: 'Active',
       field: 'active',
       cellType: TableCellType.Checkbox,
-      width: '150px',
+      width: '100px',
+      align: 'center',
+    },
+    {
+      header: '',
+      field: 'code',
+      cellType: TableCellType.Icon,
+      iconClass: 'pi pi-trash text-red-500',
+      width: '35px',
     },
   ];
 
