@@ -4,7 +4,7 @@ import { EditableTableComponent } from './table/editable.component';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, EditableTableComponent],
+  imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
 })

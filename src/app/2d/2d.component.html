@@ -1,0 +1,187 @@
+<p-tabView>
+  <p-tabPanel header="Stocks">
+    <p-table
+      [value]="[]"
+      dataKey="id"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      selectionMode="single"
+      [columns]="cols"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <p-button size="small" icon="pi pi-plus" />
+        </div>
+      </ng-template>
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col
+            *ngFor="let col of columns"
+            span="1"
+            [style.width]="col.width ? col.width : 'auto'"
+            [style.min-width]="col.minWidth ? col.minWidth : 'auto'"
+          />
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th
+            *ngFor="let col of columns"
+            [class.text-center]="col.align === 'center'"
+            [class.text-right]="col.align === 'right'"
+          >
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-rowData
+        let-columns="columns"
+        let-i="rowIndex"
+      >
+        <tr>
+          <td
+            *ngFor="let col of columns"
+            [class.text-center]="col.align === 'center'"
+            [class.text-right]="col.align === 'right'"
+            [pEditableColumn]="rowData[col.field]"
+            [pEditableColumnField]="col.field"
+            [pEditableColumnRowIndex]="i"
+            [pEditableColumnDisabled]="!col.editable"
+          >
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                @switch (col.cellType) { @case (cellType.InputNumber) {
+                <form [formGroup]="formGroup">
+                  <p-inputNumber
+                    [formControlName]="col.field"
+                    inputStyleClass="w-full"
+                  />
+                </form>
+                } @default {
+                <form [formGroup]="formGroup">
+                  <input
+                    [formControlName]="col.field"
+                    pInputText
+                    class="w-full"
+                  />
+                </form>
+                } }
+              </ng-template>
+              <ng-template pTemplate="output">
+                @switch (col.cellType) { @case (cellType.Checkbox) {
+                <p-checkbox [binary]="true" [ngModel]="rowData[col.field]" />
+                } @case (cellType.Icon) {
+                <i
+                  class="{{ col.iconClass }}"
+                  [ngStyle]="{ cursor: 'pointer' }"
+                  (click)="
+                    col.iconOnClick &&
+                      col.iconOnClick(rowData[col.field], i, $event)
+                  "
+                ></i>
+                } @default {
+                {{ rowData[col.field] }}
+                } }
+              </ng-template>
+            </p-cellEditor>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+  <p-tabPanel header="Parts">
+    <p-table
+      [value]="[]"
+      dataKey="id"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      selectionMode="single"
+      [columns]="cols2"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <p-button size="small" icon="pi pi-plus" />
+        </div>
+      </ng-template>
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col
+            *ngFor="let col of columns"
+            span="1"
+            [style.width]="col.width ? col.width : 'auto'"
+            [style.min-width]="col.minWidth ? col.minWidth : 'auto'"
+          />
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th
+            *ngFor="let col of columns"
+            [class.text-center]="col.align === 'center'"
+            [class.text-right]="col.align === 'right'"
+          >
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-rowData
+        let-columns="columns"
+        let-i="rowIndex"
+      >
+        <tr>
+          <td
+            *ngFor="let col of columns"
+            [class.text-center]="col.align === 'center'"
+            [class.text-right]="col.align === 'right'"
+            [pEditableColumn]="rowData[col.field]"
+            [pEditableColumnField]="col.field"
+            [pEditableColumnRowIndex]="i"
+            [pEditableColumnDisabled]="!col.editable"
+          >
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                @switch (col.cellType) { @case (cellType.InputNumber) {
+                <form [formGroup]="formGroup">
+                  <p-inputNumber
+                    [formControlName]="col.field"
+                    inputStyleClass="w-full"
+                  />
+                </form>
+                } @default {
+                <form [formGroup]="formGroup">
+                  <input
+                    [formControlName]="col.field"
+                    pInputText
+                    class="w-full"
+                  />
+                </form>
+                } }
+              </ng-template>
+              <ng-template pTemplate="output">
+                @switch (col.cellType) { @case (cellType.Checkbox) {
+                <p-checkbox [binary]="true" [ngModel]="rowData[col.field]" />
+                } @case (cellType.Icon) {
+                <i
+                  class="{{ col.iconClass }}"
+                  [ngStyle]="{ cursor: 'pointer' }"
+                  (click)="
+                    col.iconOnClick &&
+                      col.iconOnClick(rowData[col.field], i, $event)
+                  "
+                ></i>
+                } @default {
+                {{ rowData[col.field] }}
+                } }
+              </ng-template>
+            </p-cellEditor>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-tabPanel>
+  <p-tabPanel header="Layout">
+    <p>At vero eos et accusamus et iusto odio dignissimos...</p>
+  </p-tabPanel>
+</p-tabView>
