@@ -60,7 +60,8 @@
           "buildTarget": "ng-prime:build:production"
         },
         "development": {
-          "buildTarget": "ng-prime:build:development"
+          "buildTarget": "ng-prime:build:development",
+          "port": 4201
         }
       },
       "defaultConfiguration": "development"
